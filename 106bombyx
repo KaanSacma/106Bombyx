@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+import sys
+
+def error_handeling():
+    if len(sys.argv) < 2:
+        sys.exit(84)
+    elif len(sys.argv) > 4:
+        sys.exit(84)
+    if len(sys.argv) == 3:
+        try:
+            n = int(sys.argv[1])
+            k = float(sys.argv[2])
+        except(ValueError):
+            sys.exit(84)
+    elif len(sys.argv) == 4:
+        try:
+            n = int(sys.argv[1])
+            x0 = int(sys.argv[2])
+            x1 = int(sys.argv[3])
+        except(ValueError):
+            sys.exit(84)
+
+def bombyx(n, k):
+    for i in range(1, 101):
+        print("{0} {1:0.2f}".format(i, n))
+        if (1000 - n == 0):
+            sys.exit(84)
+        n = (k * n) * ((1000 - n) / 1000)
+ 
+def bombyx2(n, x0, x1):
+    i = 1.00
+    x = n
+    while (i < 4):
+        for j in range(1, x0):
+            if (1000 - x == 0):
+                sys.exit(84)
+            x = (i * x) * ((1000 - x) / 1000)
+        for k in range(x0, x1 + 1):
+            print("{0:.2f} {1:.2f}".format(i, x))
+        i += 0.01
+        x = n
+
+def help_message():
+    print("USAGE")
+    print("    ./106bombyx n [k | i0 i1]")
+    print("\nDESCRIPTION")
+    print("    n\t   number of first generation individuals")
+    print("    k\t   growth rate 1 to 4")
+    print("    i0\t   initial generation (included)")
+    print("    i1\t   final generation (included)")
+    sys.exit(0)
+
+def main():
+    error_handeling()
+    if len(sys.argv) == 2:
+        if (sys.argv[1] == "-h"):
+            help_message()
+        else:
+            sys.exit(84)    
+    elif len(sys.argv) == 3:
+        n = int(sys.argv[1])
+        if (n < 1):
+            sys.exit(84)
+        k = float(sys.argv[2])
+        if (k < 1 or k > 4):
+            sys.exit(84)
+        bombyx(n, k)   
+    elif len(sys.argv) == 4: 
+        n = int(sys.argv[1])
+        if (n < 1):
+            sys.exit(84)
+        x0 = int(sys.argv[2])
+        if (x0 < 1):
+            sys.exit(84)
+        x1 = int(sys.argv[3])
+        if (x1 < 1):
+            sys.exit(84)
+        if (x0 > x1):
+            sys.exit(84)
+        bombyx2(n, x0, x1)
+if __name__ == '__main__':
+    main()
